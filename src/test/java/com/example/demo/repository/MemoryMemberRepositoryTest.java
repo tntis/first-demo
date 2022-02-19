@@ -14,14 +14,14 @@ class MemoryMemberRepositoryTest {
 
     @BeforeEach // test 진행 전에 실행
     void beforeEach(){
-        repository.claerStore();
+        repository.clearStore();
     }
 
     // @AfterEach //test 진행 후에 실행
 
     @Test
     void save(){
-        repository.claerStore(); // TDD
+        repository.clearStore(); // TDD
 
         //Given
         Member member = new Member();
