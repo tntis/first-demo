@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,10 +15,18 @@ public class Member {
     private Long id;
     private String name;
 
+    public Member(){};
+    public Member(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
     // 오류
     // 1. 빌드타임 오류
     //2 런(실행) 타임 오류
 
     // 빌드타임에 동작
+
+  //  @JsonInclude(JsonInclude.Include.NON_NULL) 확인하기기기기ㅣㄱ
+    
 }

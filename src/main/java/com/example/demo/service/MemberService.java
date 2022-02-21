@@ -46,7 +46,11 @@ public class MemberService {
     // 상위타입에는 하위타입을 담을 수 있다
 
     // SOLID 원칙(객체 지향 설계)
-    // 중 L다한
+    //    SRP  단일책임원칙
+    //    OCP  개방-폐쇄법칙
+    //    LSP  리스코프 치환 원칙  --> 상위타입은 하위타입을 담을 수 있다.
+    //    ISP  인터페이스분리우너칙
+    //    DIP 의존관계역전원칙
 
 
     public Long join(Member member) {
@@ -54,7 +58,7 @@ public class MemberService {
             repository.save(member);
             return member.getId();
     }
-//안좋은 코드
+//안좋은 코드 // 에러 로그를 남길 경우,
     public Long join2(Member member) {
         try {
             checkDuplicateMemberName(member);

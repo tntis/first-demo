@@ -3,6 +3,8 @@ package com.example.demo.service;
 import com.example.demo.domain.Member;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.repository.MemoryMemberRepository;
+import org.assertj.core.api.Assertions;
+import org.assertj.core.api.ThrowableAssert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +14,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 //@SpringBootTest
 class MemberServiceTest {
@@ -41,8 +43,8 @@ class MemberServiceTest {
 
 
 
-    @Test
-    void join_정상() {
+    @Test // 정상일떄
+    void join() {
         //Given
         Member member = new Member();
         member.setName("수빈");
@@ -51,24 +53,29 @@ class MemberServiceTest {
         Long memberId =  memberService.join(member);
 
         //Then
-        assertThat(memberId).isEqualTo(1);
+
         assertThat(memberId).isEqualTo(member.getId());
         System.out.println("memberId = " + memberId);
     }
 
-    @Test
+    @Test // 중복가입일 경우
     void join_Excetpion() {
         //Given
         Member member = new Member();
         member.setName("수빈");
+        Member member2 = new Member();
+        member.setName("수빈");
+        memberService.join(member);
 
         // When
-        Long memberId =  memberService.join(member);
-
         //Then
-        assertThat(memberId).isEqualTo(1);
-        assertThat(memberId).isEqualTo(member.getId());
-        System.out.println("memberId = " + memberId);
+        // assertThatThrownBy(()->memberService.join(member2)).isInstanceOf(IllegalStateException.class); 
+
+        //when
+        ThrowableAssert.ThrowingCallable callable = () -> memberService.join(member2);
+        //then
+        assertThatThrownBy(callable).isInstanceOf(IllegalStateException.class); // 에러는 정확한 에러를 명시해주는 것이 좋다
+        // 같은에러를 발생하나 메세지가 다른경우 hasMassage()를 추가
     }
 
 
@@ -124,6 +131,26 @@ class MemberServiceTest {
 
         assertThat(resultMember).isEqualTo(member);
     }
+
+    @Test
+    void testString(){
+        String str1 =  new String("abced");
+        String str2 =  new String("abced");
+        String str3 =  "abced";    // 스트링 리터럴(Literal)
+        String str4 =  "abced";
+
+        // isEqualTo == 비교
+        assertThat(str1).isEqualTo(str2);
+
+        //isSameAs 참조값 비교
+        assertThat(str1).isNotSameAs(str3);
+        assertThat(str3).isSameAs(str4);
+       
+        // 성능
+        // String vs. StringBuilder vs. StringBuffer
+        // 스트링 변경시에는 StringBuffer 가 좋다
+    }
+
 }
 
 //@SpringBootTest  가없으면 Authwired 가 실행이 안되어 에러 발생 new 객제를 생성해애함
