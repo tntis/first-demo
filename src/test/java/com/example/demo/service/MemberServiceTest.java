@@ -10,13 +10,17 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-//@SpringBootTest
+@SpringBootTest
+@Transactional
+//@Rollback(false) // true 가 default
 class MemberServiceTest {
     /*
      //@SpringBootTest 사용시
@@ -28,26 +32,35 @@ class MemberServiceTest {
         memberService.removeMember();
      */
 
+    @Autowired
     MemberService memberService;
-    MemberRepository memberRepository;
+    
+   // MemberRepository memberRepository;
+    
     @BeforeEach
     void beforeEach() {
-        memberRepository = new MemoryMemberRepository();
-        memberService = new MemberService(memberRepository);
+       // memberRepository = new MemoryMemberRepository();
+       // memberService = new MemberService(memberRepository);
     }
 
     @AfterEach
     void afterEach() {
-        memberService.removeMember();
+        //memberService.removeMember();
     }
 
-
+    @Test
+    void testDI(){
+        System.out.println("==== memberService = " + memberService);
+    }
+        
+        
+    
 
     @Test // 정상일떄
     void join() {
         //Given
         Member member = new Member();
-        member.setName("수빈");
+        member.setName("수빈4");
 
         // When
         Long memberId =  memberService.join(member);
@@ -64,7 +77,7 @@ class MemberServiceTest {
         Member member = new Member();
         member.setName("수빈");
         Member member2 = new Member();
-        member.setName("수빈");
+        member2.setName("수빈");
         memberService.join(member);
 
         // When
@@ -109,7 +122,7 @@ class MemberServiceTest {
         assertThat(allMembers).isEmpty();
     }
 
-    @Test // 물어보기이이이이이이 // TODO
+    @Test // 물어보기이이이이이이
     void getMember() {
         //Given
         Member member = new Member();
@@ -122,17 +135,17 @@ class MemberServiceTest {
         // When
         System.out.println("member.getId() = " + member.getId());
         System.out.println("member2.getId() = " + member2.getId());
-       Member resultMember =  memberService.getMember(1L);
+       Member resultMember =  memberService.getMember(member.getId());
         System.out.println("resultMember.getId() = " + resultMember.getId());
         //memberService.getMember(member.getId()); // 에러가 발생할 가능성이 있기때문에 이런 방식으로 하는것이 더  좋음
 
        //Then
         assertThat(resultMember.getId()).isEqualTo(member.getId());
 
-        assertThat(resultMember).isEqualTo(member);
+
     }
 
-    @Test
+    //@Test
     void testString(){
         String str1 =  new String("abced");
         String str2 =  new String("abced");

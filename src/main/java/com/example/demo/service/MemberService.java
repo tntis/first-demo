@@ -10,7 +10,8 @@ import java.util.Optional;
 // Sptring Container : IoC Container, DI Container
 // 스프링 빈(Bean) : 싱글톤 객체
 // @Conponent
-// @Controller @Service @Repository
+//  -> @Controller @Service @Repository
+// -> @Configuration
 // @Bean
 
 
@@ -37,6 +38,7 @@ public class MemberService {
     public MemberService(MemberRepository repository) {
 
         this.repository = repository;
+        System.out.println("repository = " + repository);
     }
     // 의존성 (Dependency)
     // 클래스 필드 또는 메소드 파라미터에는 상위타입을 사용하는게 좋다
@@ -47,10 +49,17 @@ public class MemberService {
 
     // SOLID 원칙(객체 지향 설계)
     //    SRP  단일책임원칙
-    //    OCP  개방-폐쇄법칙
+    //    OCP ( Open- Closed Pricipal)  개방-폐쇄 원칙 --> 확장에는 열려있고 수정에는 닫혀있다.
     //    LSP  리스코프 치환 원칙  --> 상위타입은 하위타입을 담을 수 있다.
     //    ISP  인터페이스분리우너칙
     //    DIP 의존관계역전원칙
+
+    // 전자정부프레임워크 (JPA)
+    // ORM(Object Relations Mapping,객체관계매칭)
+    // -> 스프링부트 펴준 :  JPA (Java Persistence API)
+    // -> JPA 스펙/ 명세/ 구격 -> JPA 수현체 : 하이버네이트(Hibernate)
+    // -> 스프링 데이터 JPA
+
 
 
     public Long join(Member member) {
@@ -88,9 +97,9 @@ public class MemberService {
         return result.orElse(null);
     }
 
-
-    public void removeMember(){
-        repository.clearStore();
+// 부모 클래스는 자식 클래스의 메소드를 모른다 때문에 에러발생하는 이유
+   public void removeMember(){
+      //  repository.clearStore();
     }
 }
 
