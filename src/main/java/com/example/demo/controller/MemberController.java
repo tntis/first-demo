@@ -26,9 +26,10 @@ import javax.servlet.http.HttpServletRequest;
 
 @Slf4j
 @RestController
+@RequestMapping("/demo")
 public class MemberController {
 
-    @GetMapping("/demo/path-variable/{name}/{email}")
+    @GetMapping("/path-variable/{name}/{email}")
     public String pathVariable(@PathVariable String name, @PathVariable String email ) {
         // System.out vs. log.info() -> 찾아보깅~!      log.info(3개이상부터는 Array 로만들기 떄문에 너무 많은 정보를 담는것을 안좋음)
         // stdout, stderr
@@ -37,14 +38,14 @@ public class MemberController {
         return "OK1";
     }
 
-    @GetMapping("/demo/path-variable2/{name}")
+    @GetMapping("/path-variable2/{name}")
     public String pathVariabl2e(@PathVariable String name) {
         log.info("name : {}", name);
         return "OK1";
     }
 
 
-    @GetMapping("/demo/servlet-request")
+    @GetMapping("/servlet-request")
     public String servletRequest(HttpServletRequest request) {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
@@ -55,7 +56,7 @@ public class MemberController {
     }
 
 
-    @GetMapping("/demo/request-param")
+    @GetMapping("/request-param")
     public String requestParams(
             @RequestParam String name,
             @RequestParam( required = false, defaultValue = "deault@gmail.com") String email
@@ -66,7 +67,7 @@ public class MemberController {
         return "OK3";
     }
 
-    @GetMapping("/demo/model-attribute")
+    @GetMapping("/model-attribute")
     public String modelAttribute(
         @ModelAttribute MemberDto memberDto
         // 기본생성자 객체 생성 -> Setter 로 값 할당(변수명 기준)
@@ -81,7 +82,7 @@ public class MemberController {
         return "OK4";
     }
 
-    @PostMapping("/demo/request-body/string")
+    @PostMapping("/request-body/string")
     //@RequestMapping(value = "/demo/request-body/string", method = RequestMethod.POST)
     public String requestBodyString(
             @RequestBody String body
@@ -90,7 +91,7 @@ public class MemberController {
         return "OK5";
     }
 
-    @PostMapping("/demo/request-body/object")
+    @PostMapping("/request-body/object")
     //@RequestMapping(value = "/demo/request-body/string", method = RequestMethod.POST)
     public String requestBodyObject(
             @RequestBody MemberDto memberDto
@@ -99,7 +100,7 @@ public class MemberController {
         return "OK6";
     }
 
-    @PostMapping("/demo/request-body/parameter")
+    @PostMapping("/request-body/parameter")
     //@RequestMapping(value = "/demo/request-body/string", method = RequestMethod.POST)
     public String requestBodyParameter(
             @ModelAttribute MemberDto memberDto

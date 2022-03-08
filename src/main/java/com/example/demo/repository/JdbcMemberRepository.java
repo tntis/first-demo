@@ -22,25 +22,25 @@ public class JdbcMemberRepository implements MemberRepository {
     @Override
     public Member save(Member member) {
         String sql = "insert into member(name) values(?)";
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        try {
-            conn = getConnection();
-            pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+;
+        try (
+                Connection conn = getConnection();
+                PreparedStatement   pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+             ){
+
             pstmt.setString(1, member.getName());
             pstmt.executeUpdate();
-            rs = pstmt.getGeneratedKeys();
-            if (rs.next()) {
-                member.setId(rs.getLong(1));
-            } else {
-                throw new SQLException("id 조회 실패");
+            try(ResultSet rs = pstmt.getGeneratedKeys()) {
+                if (rs.next()) {
+                    member.setId(rs.getLong(1));
+                } else {
+                    throw new SQLException("id 조회 실패");
+                }
             }
             return member;
         } catch (Exception e) {
             throw new IllegalStateException(e);
-        } finally {
-            close(conn, pstmt, rs);
         }
     }
 

@@ -12,8 +12,7 @@ import com.example.demo.model.Calculator;
 @RestController
 // @Controller + @ResponseBody 가 합쳐진    // @Controller (@Component)
 // @Component 어노테이션이 붙은 모든 클래스 객체를 스프링 부트가 생성함
-// 이 때, 객체를 1개만 생성한다(싱클톤 객체 -> 빈(Bean)
-// 스프링이 어딘가 @Component 객체를 1개씩 만둘어서 어딘가에 저장하고 있다.
+// 이 때, 객체를 1개만 생성한다(싱클톤 객체 -> 빈(Bean) // 스프링이 어딘가 @Component 객체를 1개씩 만둘어서 어딘가에 저장하고 있다.
 // -> where? IoC(Inversion of Control: 제어 역전) 컨테이너 or DI(Dependency Injection:의존 주입) 컨테이너 or 스프링 컨테이너
 
 // @Component 어노테이션은 컴포넌트 스캔 대상이다.
