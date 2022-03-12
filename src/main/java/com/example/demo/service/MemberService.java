@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.domain.Member;
 import com.example.demo.repository.MemberRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 
 @Service // @component
+@Slf4j
 public class MemberService {
     // 스프링 빈 주입
     //1. 생성자 주임 : 장점 - 빈생성 시점에 주힙 후 ,변경 불가능 
@@ -82,6 +84,7 @@ public class MemberService {
 
     private void checkDuplicateMemberName(Member member) {
         Optional<Member> result =  repository.findByName(member.getName());
+        log.info("result : {} ", result);
         if (result.isPresent()) {
             // return 0L; 보다는
             throw  new IllegalStateException("중복된 이름이 있습니다.");

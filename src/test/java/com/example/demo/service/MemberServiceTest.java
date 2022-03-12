@@ -48,7 +48,7 @@ class MemberServiceTest {
         //memberService.removeMember();
     }
 
-    @Test
+    //@Test
     void testDI(){
         System.out.println("==== memberService = " + memberService);
     }
@@ -72,6 +72,7 @@ class MemberServiceTest {
     }
 
     @Test // 중복가입일 경우
+    @Rollback(false)
     void join_Excetpion() {
         //Given
         Member member = new Member();
