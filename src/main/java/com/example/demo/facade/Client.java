@@ -12,6 +12,7 @@ public class Client {
 /*
      A, B,(C1,C2) D
 OCP 의존성을 최소화
+퍼사드의 의도 :
 
 
  */

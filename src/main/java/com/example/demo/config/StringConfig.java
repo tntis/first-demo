@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 //import javax.persistence.EntityManager;
+import javax.persistence.EntityManager;
 import javax.sql.DataSource;
 
 // 스프링 Bean 생성
@@ -18,14 +19,13 @@ import javax.sql.DataSource;
 @Configuration //@Component와는 약간의 차이가 있다.
 // 구성 (Configuration)
 public class StringConfig {
-
-   // @Bean
-    public MemberRepository memberRepository(DataSource dataSource
-    /* EntityManager em */) {
+     @Bean
+    public MemberRepository memberRepository(/*DataSource dataSource*/
+     EntityManager em ) {
         // return new MemoryMemberRepository();
-        return new JdbcMemberRepository(dataSource);
+        // return new JdbcMemberRepository(dataSource);
         // return new JdbcTemplateMemberRepository(dataSource);
-       // return new JpaMemberRepository(em);
+        return new JpaMemberRepository(em);
     }
 
 

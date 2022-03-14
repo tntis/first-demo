@@ -5,6 +5,7 @@ import com.example.demo.repository.MemberRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +19,7 @@ import java.util.Optional;
 
 @Service // @component
 @Slf4j
+// @Transactional(readOnly = true)  // readOnly(CUD가 발생하지 않음) // service 개층에서 사용함
 public class MemberService {
     // 스프링 빈 주입
     //1. 생성자 주임 : 장점 - 빈생성 시점에 주힙 후 ,변경 불가능 
@@ -63,7 +65,7 @@ public class MemberService {
     // -> 스프링 데이터 JPA
 
 
-
+    @Transactional
     public Long join(Member member) {
             checkDuplicateMemberName(member); // try catch 가없어도 join2 와 같은 로직으로 작동함
             repository.save(member);

@@ -3,9 +3,14 @@ package com.example.demo.domain;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
-import  javax.persistence.Entity;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+/*import  javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;*/
 
 // OOP(Object Oriented Programing: 객체 지향 개벌ㅋ)
 // 도메인(domain) : 비즈니스 도메인, 업무 영역
@@ -29,7 +34,7 @@ public class Member {
     // 필드(멤버번수)
     //  @JsonInclude(JsonInclude.Include.NON_NULL)
     // 필드 vs 프로퍼티(속성)
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;

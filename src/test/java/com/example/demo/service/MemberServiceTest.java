@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.domain.Member;
+import com.example.demo.repository.JdbcMemberRepository;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.repository.MemoryMemberRepository;
 import org.assertj.core.api.Assertions;
@@ -19,7 +20,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 @SpringBootTest
-@Transactional
+//@Transactional // All or Nothing
 //@Rollback(false) // true 가 default
 class MemberServiceTest {
     /*
@@ -34,13 +35,18 @@ class MemberServiceTest {
 
     @Autowired
     MemberService memberService;
-    
+
+  /*  @Autowired
+    JdbcMemberRepository jdbcMemberRepository;*/
+
    // MemberRepository memberRepository;
     
     @BeforeEach
     void beforeEach() {
        // memberRepository = new MemoryMemberRepository();
        // memberService = new MemberService(memberRepository);
+
+       // jdbcMemberRepository.deleteAllMember();
     }
 
     @AfterEach
@@ -72,7 +78,6 @@ class MemberServiceTest {
     }
 
     @Test // 중복가입일 경우
-    @Rollback(false)
     void join_Excetpion() {
         //Given
         Member member = new Member();
@@ -108,7 +113,7 @@ class MemberServiceTest {
 
         //Then
        assertThat(allMembers.size()).isEqualTo(2);
-        System.out.println("allMembers.size() = " + allMembers.size());
+       // System.out.println("allMembers.size() = " + allMembers.size());
 
     }
 
@@ -137,7 +142,7 @@ class MemberServiceTest {
         System.out.println("member.getId() = " + member.getId());
         System.out.println("member2.getId() = " + member2.getId());
        Member resultMember =  memberService.getMember(member.getId());
-        System.out.println("resultMember.getId() = " + resultMember.getId());
+        //System.out.println("resultMember.getId() = " + resultMember.getId());
         //memberService.getMember(member.getId()); // 에러가 발생할 가능성이 있기때문에 이런 방식으로 하는것이 더  좋음
 
        //Then

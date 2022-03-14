@@ -50,7 +50,7 @@ public class JdbcMemberRepository implements MemberRepository {
                 PreparedStatement pstmt = conn.prepareStatement(sql);
         ) {
             pstmt.setLong(1, id);
-            try( ResultSet rs = pstmt.getGeneratedKeys()) {
+            try( ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
                     Member member = new Member();
                     member.setId(rs.getLong("id"));
@@ -70,7 +70,7 @@ public class JdbcMemberRepository implements MemberRepository {
         String sql = "select * from member";
         try(    Connection conn = getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql);
-                ResultSet rs = pstmt.getGeneratedKeys()
+                ResultSet rs = pstmt.executeQuery()
         ) {
             List<Member> members = new ArrayList<>();
             while (rs.next()) {
@@ -105,8 +105,30 @@ public class JdbcMemberRepository implements MemberRepository {
         }
     }
 
+    public void deleteAllMember(){
+        String sql = "delete from member";
+        try(
+                Connection conn = getConnection();
+                PreparedStatement pstmt = conn.prepareStatement(sql)
+        ){
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
     private Connection getConnection() {
-        return DataSourceUtils.getConnection(dataSource);
+//        return DataSourceUtils.getConnection(dataSource);
+        try {
+            Connection connection = dataSource.getConnection();
+            System.out.println("connection = " + connection);
+            return connection;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 //    private void close(Connection conn, PreparedStatement pstmt, ResultSet rs) {
