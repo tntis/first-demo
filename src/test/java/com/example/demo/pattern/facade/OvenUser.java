@@ -17,8 +17,9 @@ public class OvenUser {
 
          Thread.sleep(3000);
 
-        // oven.off();
-//
+         oven.off();
+
+
             // 중간취소
 //        magnetron.off();
 //        slideTable.off();

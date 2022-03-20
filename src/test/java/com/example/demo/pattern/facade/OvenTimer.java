@@ -11,11 +11,16 @@ import java.util.TimerTask;
 public class OvenTimer {
 
     private Timer timer;
+    private Oven oven;
+
+    public OvenTimer(Oven oven) {
+        this.oven = oven;
+    }
 
     public void on(int second) {
         log.info("타이머 ON");
 
-        TimerTask timerTask = new OvenTimerTask(this,second);
+        TimerTask timerTask = new OvenTimerTask(this,second, oven);
         timer = new Timer();
         timer.schedule(timerTask,0,1000);
         
@@ -34,16 +39,17 @@ public class OvenTimer {
         private Oven oven;
         private int second;
 
-        public OvenTimerTask(OvenTimer ovenTimer, int second) {
+        public OvenTimerTask(OvenTimer ovenTimer, int second, Oven oven) {
             this.ovenTimer = ovenTimer;
             this.second = second;
+            this.oven = oven;
         }
 
         @Override
         public void run() {
             log.info("타이머 : " + second--);
             if(second < 0){
-                //ovenTimer.off();
+              //  ovenTimer.off();
                 oven.off();
             }
         }
