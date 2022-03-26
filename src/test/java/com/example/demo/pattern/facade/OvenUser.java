@@ -15,9 +15,9 @@ public class OvenUser {
          Oven oven = new Oven();
          oven.on(4);
 
-         Thread.sleep(3000);
+     //    Thread.sleep(3000);
 
-         oven.off();
+     //    oven.off();
 
 
             // 중간취소
@@ -26,3 +26,8 @@ public class OvenUser {
 //        timer.off();
     }
 }
+
+
+
+
+// 현상(증상) -> 원인 -> 해결책

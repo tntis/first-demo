@@ -14,7 +14,7 @@ public class Oven {
        magnetron = new OvenMagnetron();
        slideTable = new OvenSlideTable();
 //       turnTable = new OvenTurnTable();
-       timer = new OvenTimer(this);
+       timer = new OvenTimer(this); 
    }
 
    public void on(int timerCount){
