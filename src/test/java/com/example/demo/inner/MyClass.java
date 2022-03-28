@@ -40,10 +40,16 @@ public class MyClass {
 
 /*
 
- 동일성(identity) : 참조 주소가 같다. == 비교 두 개의 객체가 완전히 같은 경우를 의미 (동일하다고 동등한것은 아니다,시점이 다를 수 있기 때문에)
+ 동일성(identity) : 참조값(갹채 주소)이 같다. == 비교 두 개의 객체가 완전히 같은 경우를 의미 (동일하다고 동등한것은 아니다,시점이 다를 수 있기 때문에)
  동등성(equality) : 내용이 같다 equals() 두 개의 객체가 같은 정보를 갖고 있는 경우를 의미
 
+ int, long, char -> Primitive Type(기본 타입)
+ = 주소가 없다
 
+ Integer, Long, Char -> Wrapper Type(래퍼 타입)
+
+ Reference Type
+ = 클래스를 통해 생성한 객체
 
 
 */

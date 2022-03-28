@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.dto.MemberDto;
-import com.sun.javadoc.MemberDoc;
+//import com.sun.javadoc.MemberDoc;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpRequest;
 import org.springframework.web.bind.annotation.*;
@@ -58,7 +58,8 @@ public class MemberController {
 
     @GetMapping("/request-param")
     public String requestParams(
-            @RequestParam String name,
+            @RequestParam String name, // name 같을때 name 생략가능
+            // @RequestParam(name(value)로 써도된다  ="name")  String name,
             @RequestParam( required = false, defaultValue = "deault@gmail.com") String email
             // defaultValue 있을 경우 required 가 있을 필요가 없다.
     ) {
@@ -69,8 +70,11 @@ public class MemberController {
 
     @GetMapping("/model-attribute")
     public String modelAttribute(
-        @ModelAttribute MemberDto memberDto
+        @RequestParam String name2 , // Primitive Type, Wrqpper Type -> @RequestParam
+        @ModelAttribute MemberDto memberDto // Referemce Type -> @ModelAttribute
+        //  @ModelAttribute  생략가능함
         // 기본생성자 객체 생성 -> Setter 로 값 할당(변수명 기준)
+        // toString
     ) {
     /*
         MemberDto dto = new MemberDto();
@@ -80,6 +84,16 @@ public class MemberController {
     */
         log.info("memberdto : {} ", memberDto);
         return "OK4";
+    }
+
+    @PostMapping("/request-param")
+    public String requestParam2(
+            @RequestParam String name,
+            @RequestParam String email
+    ) {
+        log.info("name : {} ", name);
+        log.info("email : {} ", email);
+        return "OK6";
     }
 
     @PostMapping("/request-body/string")
@@ -112,5 +126,9 @@ public class MemberController {
 
 
 }
+/*
+String name // Primitive Type, Wrqpper Type -> @RequestParam
+MemberDto //
 
+ */
 

@@ -112,11 +112,24 @@ public class HelloController {
     // 오류 종류
     // 1. 컴파일(빌드) 오류 -> 컴파일 시 오류 발생 / 오류는 이 떄 발견하는게 좋음
     // 2. 런타임(실행) 오류 -> 실행 초기에 오류가 나거나, 실행 중에 오류가 남
+/*
+     HTTP Method : 요청
+     GET : 조회(R)
+     POST : 저장(C), (복잡한 조건의) 조회, 기타 등등
+     PUT : 전체수정(U)
+     PATCH : 부분수정(U)
+     DELETE : 삭제(D)
+     -> RESTful API 설계를 해보면, 더 잘 알게 된다.
+*/
+    /*
+    GET 파라미터
+    POST 파라미터
+    POST 바디
+    -> 형식 : 파라미터
 
-    // HTTP Method : 요청
-    // GET : 조회(R)
-    // POST : 저장(C), (복잡한 조건의) 조회, 기타 등등
-    // PUT : 전체수정(U)
-    // PATCH : 부분수정(U)
-    // DELETE : 삭제(D)
-    // -> RESTful API 설계를 해보면, 더 잘 알게 된다.
+
+
+
+
+    http 프로토콜 규격
+    **/

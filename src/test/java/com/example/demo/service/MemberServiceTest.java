@@ -158,16 +158,46 @@ class MemberServiceTest {
         String str3 =  "abced";    // 스트링 리터럴(Literal)
         String str4 =  "abced";
 
-        // isEqualTo == 비교
+        // isEqualTo 동등성(내용, equals)  비교
         assertThat(str1).isEqualTo(str2);
 
-        //isSameAs 참조값 비교
+        //isSameAs 동일성(잠조, ==) 비교
         assertThat(str1).isNotSameAs(str3);
         assertThat(str3).isSameAs(str4);
        
         // 성능
         // String vs. StringBuilder vs. StringBuffer
         // 스트링 변경시에는 StringBuffer 가 좋다
+    }
+
+    void testString2(){
+        String s1 = "Cat";
+        String s2 = "Cat";
+        String s3 = "Dog";
+
+        assertThat(s1).isSameAs(s2);
+        assertThat(s2).isNotSameAs(s3);
+
+        s1 = s3;
+        System.out.println("s1 = " + s1);
+        System.out.println("s2 = " + s2);
+        System.out.println("s3 = " + s3);
+
+    }
+
+    void testString3(){
+        String s1 = new String("Cat");
+        String s2 = new String("Cat");
+        String s3 = new String("Dog");
+
+        assertThat(s1).isNotSameAs(s2);
+        assertThat(s2).isNotSameAs(s3);
+
+        s1 = s3;
+        System.out.println("s1 = " + s1);
+        System.out.println("s2 = " + s2);
+        System.out.println("s3 = " + s3);
+
     }
 
 }

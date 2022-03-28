@@ -35,6 +35,10 @@ import org.junit.jupiter.api.Test;
         MyClass.MyiInnerClass myiInnerClass1 = new MyClass().new MyiInnerClass();
         MyClass.MyiInnerClass myiInnerClass2 = new MyClass().new MyiInnerClass();
         log.info(">>> myiInnerClass: {}", myiInnerClass1.equals(myiInnerClass2));
+        // new를 사용하여 각각 객체를 생성한 경우, 두 객체의 == 비교(참조값 비교)는 무조건 false이다.
+        // 그래서 equals() 메소드로 변경하라고 IntelliJ에서 알려준다.
+        // equals() 메소드를 통한 비교는 내용 비교이나, 해당 메소드를 오버라이드 해야 한다.
+
 
         // 정적  (멤버) 클래스 객체 생성
         MyClass.MyStaticClass myStaticClass1 = new MyClass.MyStaticClass();

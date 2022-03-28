@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Getter  @Setter
 @ToString
-// (exclude 뺴고사용)
+// (exclude 뺄것만) of 는 포함할것 toString(of = {"name"})
 public class MemberDto {
     private String name;
     private String email;
