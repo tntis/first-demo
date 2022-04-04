@@ -9,8 +9,9 @@ public interface Callable {
     // 바디가 있는 메소드일 경우에는 사용가능 함
     // 1개 바디가 없는 메소드, 여러가의 바디가 있는 메소드 가능??
 
-
-    public static void run() {
+    
+    // Java 1.8 변경사항 : default 메소드와 static 메소드 사용가능
+    static void run() {
 
     }
 

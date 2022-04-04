@@ -64,7 +64,7 @@ class MyCallableTest {
         // 람다 : this가 익명 구현 클래스와 다르다.
         // 람다 캡쳐링 : 람다가 실행될 때, 메모리 동작
         // 람다 : 구현 대상 인터페이스의 메소드가 1개여야한다.
-        Callable callable = () -> System.out.println(">>> this 1 = " + this);          //  내부적으로 보면 객체다
+        Callable callable = () -> System.out.println(">>> this 1 = " + MyCallableTest.this);  //  내부적으로 보면 객체다
         callable.call();
         System.out.println(">>>this 2= " + this);
         System.out.println("callable = " + callable);
@@ -85,7 +85,7 @@ class MyCallableTest {
 
     @Test
     void consumer() {
-        //Generic은 Wrapper 타입 또는 Rㄷference 타입만 가능
+        //Generic은 Wrapper 타입 또는 Reference 타입만 가능
         Consumer<Integer> consumer1 = i -> System.out.println("integer1 = " + i);
         Consumer<Integer> consumer2 = i -> System.out.println("integer2 = " + i);
 

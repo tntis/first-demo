@@ -23,6 +23,6 @@ public interface MemberRepository {
     
 }
 
-// Java 1.8 에 추가된 것
+// Java  에 추가된 것
 // Optional, Stream, Lambda Expression(람다식)
 // 인터페이스 : default, static 메소드 정의할 수 있다.(메소드 Body를 추가할수 있다.)
